@@ -57,8 +57,8 @@ export const CriarSalas: React.FC = () => {
 
       <div className="max-w-6xl mx-auto">
         <Card className="border-border">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-foreground">
+          <CardHeader className="text-center">
+            <CardTitle className="flex items-center justify-center gap-2 text-foreground">
               <School className="h-5 w-5" />
               Nova Sala Virtual
             </CardTitle>
