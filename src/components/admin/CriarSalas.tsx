@@ -55,7 +55,7 @@ export const CriarSalas: React.FC = () => {
         <p className="text-muted-foreground">Criação de novas salas virtuais</p>
       </div>
 
-      <div className="max-w-4xl">
+      <div className="max-w-6xl">
         <Card className="border-border">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-foreground">
