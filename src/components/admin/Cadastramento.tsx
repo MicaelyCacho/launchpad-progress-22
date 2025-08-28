@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Users, GraduationCap } from 'lucide-react';
 
@@ -25,7 +25,7 @@ export const Cadastramento: React.FC = () => {
     cpf: '',
     idade: '',
     email: '',
-    salas: [] as string[],
+    salas: '',
     turma: ''
   });
 
@@ -91,7 +91,7 @@ export const Cadastramento: React.FC = () => {
         cpf: '',
         idade: '',
         email: '',
-        salas: [],
+        salas: '',
         turma: ''
       });
     }
@@ -143,12 +143,10 @@ export const Cadastramento: React.FC = () => {
     }
   };
 
-  const handleSalaToggle = (salaId: string) => {
+  const handleSalaChange = (salaId: string) => {
     setAlunoForm(prev => ({
       ...prev,
-      salas: prev.salas.includes(salaId)
-        ? prev.salas.filter(id => id !== salaId)
-        : [...prev.salas, salaId]
+      salas: salaId
     }));
   };
 
@@ -223,21 +221,19 @@ export const Cadastramento: React.FC = () => {
               </div>
 
               <div>
-                <Label>Salas</Label>
-                <div className="space-y-2 mt-2">
-                  {mockSalas.map((sala) => (
-                    <div key={sala.id} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={`sala-${sala.id}`}
-                        checked={alunoForm.salas.includes(sala.id)}
-                        onCheckedChange={() => handleSalaToggle(sala.id)}
-                      />
-                      <Label htmlFor={`sala-${sala.id}`} className="text-sm">
+                <Label htmlFor="salas">Salas</Label>
+                <Select value={alunoForm.salas} onValueChange={handleSalaChange}>
+                  <SelectTrigger className="mt-2">
+                    <SelectValue placeholder="Selecione uma sala" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover border border-border z-50">
+                    {mockSalas.map((sala) => (
+                      <SelectItem key={sala.id} value={sala.id} className="hover:bg-accent">
                         {sala.name}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
