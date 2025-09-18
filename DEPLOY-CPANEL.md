@@ -51,9 +51,42 @@ public_html/
 ```
 
 ## Problemas comuns
-- **Página em branco**: Verifique se todos os arquivos foram enviados
-- **404 ao navegar**: Certifique-se que o arquivo `.htaccess` está presente
-- **Arquivos não carregam**: Verifique as permissões dos arquivos
+
+### Site não carrega (página em branco)
+1. **Verifique se todos os arquivos foram enviados**
+   - Deve haver um arquivo `index.html` na raiz
+   - Pasta `assets/` com arquivos CSS e JS
+   
+2. **Verifique permissões no File Manager**
+   - Clique com botão direito → Permissions
+   - **Pastas: 755** (rwxr-xr-x)
+   - **Arquivos: 644** (rw-r--r--)
+
+3. **Para Apache 2.4 (cPanel moderno)**
+   - O arquivo `.htaccess` já foi atualizado para compatibilidade
+   - Se ainda não funcionar, tente criar um arquivo `index.php`:
+   ```php
+   <?php include_once("index.html"); ?>
+   ```
+
+### 404 ao navegar entre páginas
+- **Certifique-se que o arquivo `.htaccess` está presente**
+- **Verifique se o módulo mod_rewrite está ativo**
+  - Entre em cPanel → Software → MultiPHP INI Editor
+  - Procure por "rewrite" nas configurações
+
+### Arquivos CSS/JS não carregam
+1. **Verificar permissões** (644 para arquivos)
+2. **Limpar cache do navegador** (Ctrl+F5)
+3. **Verificar se a pasta assets/ foi enviada completa**
+
+### Como testar se as permissões estão corretas
+1. File Manager → public_html/
+2. Selecionar todos os arquivos → Permissions
+3. **Definir em lote:**
+   - Arquivos: 644
+   - Pastas: 755
+   - Marcar "Aplicar recursivamente"
 
 ## Atualizações futuras
 Para atualizar o site:
